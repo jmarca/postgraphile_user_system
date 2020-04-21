@@ -1,0 +1,25 @@
+{
+  "name": "postgraphile_extensions",
+  "version": "1.0.0",
+  "description": "Sqitch-based extensions for postgraphile project",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} pg_prove test/*.sql",
+    "sqitch:deploy": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} sqitch deploy",
+    "sqitch:revert": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} sqitch revert -y",
+    "install": "npm run sqitch:deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gitolite:a/jmarca/postgraphile_related/postgraphile_extensions"
+  },
+  "author": "James E. Marca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmarca/postgraphile_extensions/issues"
+  },
+  "homepage": "https://github.com/jmarca/postgraphile_extensions#readme"
+}
