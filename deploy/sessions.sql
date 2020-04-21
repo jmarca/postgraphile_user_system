@@ -8,7 +8,7 @@ SET search_path TO app_private,public;
 
 CREATE TABLE sessions (
       uuid uuid NOT NULL  DEFAULT gen_random_uuid() primary key,
-      user_id json NOT NULL,
+      user_id uuid NOT NULL,
       created_at timestamp with time zone NOT NULL  DEFAULT now(),
       last_active timestamp with time zone NOT NULL  DEFAULT now()
 );

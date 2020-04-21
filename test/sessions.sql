@@ -28,7 +28,7 @@ SELECT col_not_null(      'sessions', 'last_active' );
 SELECT col_has_default( 'sessions', 'last_active' );
 
   SELECT has_column(        'sessions', 'user_id' );
-SELECT col_type_is(       'sessions', 'user_id', 'json' );
+SELECT col_type_is(       'sessions', 'user_id', 'uuid' );
 SELECT col_not_null(      'sessions', 'user_id' );
 SELECT col_hasnt_default( 'sessions', 'user_id' );
 
