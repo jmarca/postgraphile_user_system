@@ -1,4 +1,6 @@
-# Extensions for postgraphile
+# user system tables for postgraphile
+
+Essentially a straight port from postgraphile starter sql
 
 To use this, you need to have sqitch installed properly.  To run tests,
 you need to have pg_prove installed properly.
@@ -44,7 +46,7 @@ export PGUSER=someuser
 export PGHOST=dbhostaddress
 export PGPORT=5432
 export PGDATABASE=mysqitchdb
-npm install https://github.com/jmarca/postgraphile_extensions
+npm install https://github.com/jmarca/postgraphile_user_system
 ```
 
 That should do the trick.

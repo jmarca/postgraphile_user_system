@@ -1,7 +1,7 @@
 {
-  "name": "postgraphile_extensions",
+  "name": "postgraphile_user_system",
   "version": "1.0.0",
-  "description": "Sqitch-based extensions for postgraphile project",
+  "description": "Sqitch-based user system for postgraphile project.  After postgraphile starter project",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "gitolite:a/jmarca/postgraphile_related/postgraphile_extensions"
+    "url": "gitolite:a/jmarca/postgraphile_related/postgraphile_user_system"
   },
   "author": "James E. Marca",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jmarca/postgraphile_extensions/issues"
+    "url": "https://github.com/jmarca/postgraphile_user_system/issues"
   },
-  "homepage": "https://github.com/jmarca/postgraphile_extensions#readme"
+  "homepage": "https://github.com/jmarca/postgraphile_user_system#readme"
 }
