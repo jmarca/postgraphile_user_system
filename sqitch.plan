@@ -2,3 +2,4 @@
 %project=postgraphile_user_system
 
 simple_sessions [postgraphile_schemas:schemas] 2020-04-21T17:02:34Z James E. Marca <james@activimetrics.com> # table for  sessions
+sessions [postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp] 2020-04-21T17:34:16Z James E. Marca <james@activimetrics.com> # table for user sessions
