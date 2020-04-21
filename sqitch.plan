@@ -6,3 +6,4 @@ sessions [postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp] 2020-0
 current_session_id [postgraphile_schemas:schemas sessions] 2020-04-21T17:52:44Z James E. Marca <james@activimetrics.com> # function for current session id
 current_user_id [postgraphile_schemas:schemas sessions] 2020-04-21T17:58:42Z James E. Marca <james@activimetrics.com> # function for current user id
 users [sessions postgraphile_roles:anonymous_role postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp postgraphile_extensions:citext] 2020-04-21T18:26:57Z James E. Marca <james@activimetrics.com> # table for users
+current_user [users current_user_id] 2020-04-21T19:58:29Z James E. Marca <james@activimetrics.com> # function for current user
