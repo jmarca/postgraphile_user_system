@@ -82,9 +82,7 @@ from sid;
 
 PREPARE expected_a AS select 'james@activimeowtricks.com'::citext;
 PREPARE expected_b AS select 'james@activimetrics.com'::citext;
-PREPARE just_one AS select 1;
-PREPARE have_two AS select 2;
-PREPARE get_email_count AS select count(*) FROM app_public.user_emails WHERE email='james@activimeowtricks.com';
+
 PREPARE get_the_email AS select email FROM app_public.user_emails WHERE email='james@activimeowtricks.com';
 PREPARE get_an_email AS select email FROM app_public.user_emails limit 1;
 
