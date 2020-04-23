@@ -1,6 +1,6 @@
 -- Deploy postgraphile_user_system:users to pg
 -- requires: sessions
--- requires: postgraphile_roles:anonymous_role
+-- requires: postgraphile_roles:visitor_role
 -- requires: postgraphile_schemas:schemas
 -- requires: postgraphile_extensions:uuid-ossp
 -- requires: postgraphile_extensions:citext
