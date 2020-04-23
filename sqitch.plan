@@ -12,3 +12,4 @@ trigger_user_secrets_insert [users user_secrets] 2020-04-21T20:25:59Z James E. M
 user_has_password [users user_secrets] 2020-04-21T22:11:42Z James E. Marca <james@activimetrics.com> # function to see if user has a password in secret table
 user_emails [users postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp postgraphile_extensions:citext] 2020-04-21T22:22:43Z James E. Marca <james@activimetrics.com> # table for user email addresses
 user_email_secrets [user_emails postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp postgraphile_extensions:citext] 2020-04-23T20:58:42Z James E. Marca <james@activimetrics.com> # table for user email secrets
+verify_email [user_emails user_email_secrets] 2020-04-23T21:54:54Z James E. Marca <james@activimetrics.com> # function to verify email token
