@@ -37,12 +37,25 @@ PREPARE badlogintest AS SELECT app_private.login('jmarca'::citext,'robblefruit')
 PREPARE logintest AS SELECT app_private.login('jmarca'::citext,'grobblefruit');
 PREPARE loginemailtest AS SELECT app_private.login('james@activimeowtricks.com'::citext,'grobblefruit');
 
+
 SELECT results_eq( 'badlogintest',
                   $$VALUES ((null)::app_private.sessions)$$, 'bad password should return nothing');
 SELECT isnt_empty( 'logintest', 'login okay is not empty');
 SELECT results_ne( 'logintest',
                   $$VALUES ((null)::app_private.sessions)$$, 'good password does not return null record');
 SELECT isnt_empty( 'loginemailtest', 'user_athentications via email is okay');
+
+
+prepare session_check as
+    select s.uuid,s.user_id
+    from app_public.users u
+    join app_private.sessions s on (s.user_id=u.id)
+    where u.username='jmarca';
+
+-- verify that session is set
+SELECT isnt_empty('session_check','should set a session with logged-in user');
+
+
 
 -- multiple bad logins will throw
 
