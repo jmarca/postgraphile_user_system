@@ -85,22 +85,34 @@ on app_public.user_emails
 for delete
 using (
     user_id = app_public.current_user_id()
-    and
-    email != (SELECT case when a.firstemail = b.lastemail then firstemail else '' end
-               FROM (select email as firstemail from app_public.user_emails order by email limit 1 ) a
-               join (select email as lastemail from app_public.user_emails order by email desc limit 1 ) b on (true)
-               )
+    AND
+    -- id is not first and is not last regardless of is_verified state
+    NOT
+      (id IN (select id
+                from app_public.user_emails
+                where user_id=app_public.current_user_id()
+                order by id limit 1)
+       AND
+       id IN (select id
+                from app_public.user_emails
+                where user_id=app_public.current_user_id()
+                order by id desc limit 1)
+     )
+    AND
+    -- id is not first nor is last of is_verified emails
+    NOT
+      (id IN (select id
+                from app_public.user_emails
+                where user_id=app_public.current_user_id() and is_verified
+                order by id limit 1)
+       AND
+       id IN (select id
+                from app_public.user_emails
+                where user_id=app_public.current_user_id() and is_verified
+                order by id desc limit 1)
+       )
     );
 
--- create policy keep_one_email
--- on app_public.user_emails
--- for delete
--- using (
---      email != (SELECT case when a.firstemail = b.lastemail then firstemail else '' end
---                FROM (select email as firstemail from app_public.user_emails order by email limit 1 ) a
---                join (select email as lastemail from app_public.user_emails order by email desc limit 1 ) b on (true)
---                )
---     );
 
 grant select on app_public.user_emails to :DATABASE_VISITOR;
 grant insert (email) on app_public.user_emails to :DATABASE_VISITOR;
