@@ -86,21 +86,33 @@ for delete
 using (
     user_id = app_public.current_user_id()
     and
-    email != (SELECT case when a.firstemail = b.lastemail then firstemail else '' end
-               FROM (select email as firstemail from app_public.user_emails order by email limit 1 ) a
-               join (select email as lastemail from app_public.user_emails order by email desc limit 1 ) b on (true)
+    -- last one, verified or not verified
+    email != (SELECT case when a.firstemail = b.lastemail then firstemail else NULL end
+               FROM (select email as firstemail
+                     from app_public.user_emails
+                     --where user_id=app_public.current_user_id()
+                     order by email limit 1 ) a
+               join (select email as lastemail
+                     from app_public.user_emails
+                     --where user_id=app_public.current_user_id()
+                     order by email desc limit 1 ) b on (true)
                )
+    -- and
+    -- -- last one, only considering verified
+    -- id != (SELECT case when a.firstid = b.lastid then firstid else NULL end
+    --            FROM (select id as firstid
+    --                  from app_public.user_emails
+    --                  where user_id=app_public.current_user_id()
+    --                  and is_verified
+    --                  order by id limit 1 ) a
+    --            join (select id as lastid
+    --                  from app_public.user_emails
+    --                  where user_id=app_public.current_user_id()
+    --                  and is_verified
+    --                  order by id desc limit 1 ) b on (true)
+    --            )
     );
 
--- create policy keep_one_email
--- on app_public.user_emails
--- for delete
--- using (
---      email != (SELECT case when a.firstemail = b.lastemail then firstemail else '' end
---                FROM (select email as firstemail from app_public.user_emails order by email limit 1 ) a
---                join (select email as lastemail from app_public.user_emails order by email desc limit 1 ) b on (true)
---                )
---     );
 
 grant select on app_public.user_emails to :DATABASE_VISITOR;
 grant insert (email) on app_public.user_emails to :DATABASE_VISITOR;
