@@ -12,6 +12,11 @@ from pg_trigger t
 join pg_class c on (c.oid=t.tgrelid)
 where c.relname='user_authentications' and t.tgname='_100_timestamps';
 
+select 1/count(*)
+from pg_trigger t
+join pg_class c on (c.oid=t.tgrelid)
+where c.relname='user_authentications' and t.tgname='_500_audit_removed';
+
 -- check policies exist
 select 1/count(*)
 from pg_policy p

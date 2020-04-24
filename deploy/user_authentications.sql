@@ -9,7 +9,7 @@ SET search_path TO app_public,public;
 
 CREATE TABLE user_authentications (
       id uuid primary key NOT NULL  DEFAULT gen_random_uuid(),
-      user_id uuid NOT NULL references users on delete cascade(),
+      user_id uuid NOT NULL references users on delete cascade,
       service text NOT NULL,
       identifier text NOT NULL,
       details jsonb NOT NULL  DEFAULT '{}'::jsonb,
@@ -40,27 +40,29 @@ on app_public.user_authentications
 for delete
 using (
     user_id = app_public.current_user_id()
-    and
-    ( -- check for not last one OR also have a verified email
-      -- verified email?
-      exists(select 1
+    AND
+    -- either verified email exists,
+    -- OR id is not first and is not last regardless of is_verified state
+    (
+     EXISTS( select 1
         from app_public.user_emails
         where user_id=app_public.current_user_id()
         and is_verified
-        limit 1)
-      or
-      -- is not the last one
-      id != (SELECT case when a.firstid = b.lastid then firstid else '' end
-               FROM (select id as firstid
-                     from app_public.user_authentications
-                     where user_id=app_public.current_user_id()
-                     order by id limit 1 ) a
-               join (select id as lastid
-                     from app_public.user_authentications
-                     where user_id=app_public.current_user_id()
-                     order by id desc limit 1 ) b on (true)
-               )
-     )
+        limit 1 )
+    OR
+    (
+      NOT
+        (id IN (select id
+                  from app_public.user_authentications
+                  where user_id=app_public.current_user_id()
+                  order by id limit 1)
+         AND
+         id IN (select id
+                  from app_public.user_authentications
+                  where user_id=app_public.current_user_id()
+                  order by id desc limit 1)
+       )
+     ))
 );
 
 create trigger _500_audit_removed
