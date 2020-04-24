@@ -15,3 +15,4 @@ user_email_secrets [user_emails postgraphile_schemas:schemas postgraphile_extens
 verify_email [user_emails user_email_secrets] 2020-04-23T21:54:54Z James E. Marca <james@activimetrics.com> # function to verify email token
 user_authentications [users postgraphile_schemas:schemas postgraphile_extensions:uuid-ossp] 2020-04-23T23:28:38Z James E. Marca <james@activimetrics.com> # table user login providers
 user_authentication_secrets [user_authentications] 2020-04-24T17:32:14Z James E. Marca <james@activimetrics.com> # table secrets for authentications
+login_function 2020-04-24T17:36:42Z James E. Marca <james@activimetrics.com> # add login function
