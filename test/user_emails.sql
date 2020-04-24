@@ -70,16 +70,6 @@ sid(uuid) as (select uuid from app_private.sessions s join uid u on (u.id=s.user
 select set_config('jwt.claims.session_id', sid.uuid::text, true)
 from sid;
 
--- select c.email, c.email != d.email
--- from
--- app_public.user_emails c
--- join
---  (select case when a.firstemail=b.lastemail then a.firstemail else '' end as email
---  from (( select aa.email as firstemail from app_public.user_emails aa order by aa.email limit 1)a
---  join ( select aaa.email as lastemail from app_public.user_emails aaa order by aaa.email desc limit 1)b  on (true) )
---  ) d on (true);
-
-
 SET ROLE :DATABASE_VISITOR;
 
 SELECT results_eq(
@@ -130,9 +120,9 @@ SELECT results_eq(
 
 -- check case of verified emails.  should not be able to delete last
 -- verified even if multiple unverified
+
 set role postgres;
 
--- test if verified is true case, not generate token
 with uid(id) as (select id from app_public.users where username='jmarca')
 insert into app_public.user_emails (user_id, email, is_verified)
    select uid.id, 'james@activimeowtricks.com', true from uid;
@@ -155,7 +145,7 @@ SELECT results_eq(
     'SELECT email, is_verified FROM app_public.user_emails order by email',
     $$VALUES ('james@activimeowtricks.com'::citext,true),
              ('james@activimetrics.com'::citext, false) $$,
-    'user_emails should hold both emails again, one verified'
+    'delete should fail, user_emails should still hold both emails, one verified'
 );
 
 
@@ -164,7 +154,7 @@ DELETE FROM app_public.user_emails WHERE email='james@activimetrics.com';
 SELECT results_eq(
     'SELECT email, is_verified FROM app_public.user_emails order by email',
     $$VALUES ('james@activimeowtricks.com'::citext,true)$$,
-    'user_emails should hold both emails again, one verified'
+    'delete of unverified should succeed, user_emails should hold one email, verified'
 );
 
 SELECT finish();
