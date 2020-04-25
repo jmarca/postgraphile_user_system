@@ -18,3 +18,5 @@ user_authentication_secrets [user_authentications] 2020-04-24T17:32:14Z James E.
 login_function [users] 2020-04-24T17:36:42Z James E. Marca <james@activimetrics.com> # add login function
 logout_function [users] 2020-04-24T23:15:42Z James E. Marca <james@activimetrics.com> # add login function
 unregistered_email_resets [users user_emails user_authentications user_secrets user_email_secrets user_authentication_secrets] 2020-04-24T23:58:39Z James E. Marca <james@activimetrics.com> # table for tracking email resets
+forgot_password [users user_emails user_authentications user_secrets user_email_secrets user_authentication_secrets unregistered_email_resets] 2020-04-25T00:29:45Z James E. Marca <james@activimetrics.com> # forgot password function
+reset_password [users user_emails user_authentications user_secrets user_email_secrets user_authentication_secrets unregistered_email_resets] 2020-04-25T00:42:41Z James E. Marca <james@activimetrics.com> # reset password function
