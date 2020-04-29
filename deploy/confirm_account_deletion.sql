@@ -31,7 +31,30 @@ begin
 
   -- Check the token
   if v_user_secret.delete_account_token = token then
-    -- Token passes; delete their account :(
+    -- Token passes
+
+    -- Check that they are not the owner of any organizations
+    if exists(
+      select 1
+      from app_public.organization_memberships
+      where user_id = app_public.current_user_id()
+      and is_owner is true
+    ) then
+      raise exception 'You cannot delete your account until you are not the owner of any organizations.' using errcode = 'OWNER';
+    end if;
+
+    -- Reassign billing contact status back to the organization owner
+    update app_public.organization_memberships
+      set is_billing_contact = true
+      where is_owner = true
+      and organization_id in (
+        select organization_id
+        from app_public.organization_memberships my_memberships
+        where my_memberships.user_id = app_public.current_user_id()
+        and is_billing_contact is true
+      );
+
+    -- Delete their account :(
     delete from app_public.users where id = app_public.current_user_id();
     return true;
   end if;
