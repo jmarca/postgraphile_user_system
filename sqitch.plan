@@ -30,3 +30,6 @@ make_email_primary [users user_emails user_authentications user_secrets user_ema
 resend_email_verification [users user_emails user_authentications user_secrets user_email_secrets user_authentication_secrets unregistered_email_resets] 2020-04-25T15:38:07Z James E. Marca <james@activimetrics.com> # function to resend the email verification code
 trigger_verify_account [users user_emails user_authentications user_secrets user_email_secrets user_authentication_secrets unregistered_email_resets] 2020-04-25T15:42:10Z James E. Marca <james@activimetrics.com> # trigger function for emails table to verify the account
 users_graphql_subscription [postgraphile_utility_functions:trigger_graphql_subscription] 2020-04-25T15:54:32Z James E. Marca <james@activimetrics.com> # trigger function for user updates graphql subscriptions
+@v1.0.0 2020-04-29T13:59:37Z James E. Marca <james@activimetrics.com> # Tag v1.0.0
+confirm_account_deletion [confirm_account_deletion@v1.0.0 postgraphile_organizations:organizations postgraphile_organizations:organization_memberships] 2020-04-29T14:07:53Z James E. Marca <james@activimetrics.com> # rework confirm account deletion function
+@v1.0.1 2020-04-29T20:01:00Z James E. Marca <james@activimetrics.com> # Tag v1.0.1
