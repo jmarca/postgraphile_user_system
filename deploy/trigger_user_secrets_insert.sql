@@ -4,7 +4,7 @@
 
 BEGIN;
 
-create function app_private.tg_user_secrets__insert_with_user() returns trigger as $$
+create or replace function app_private.tg_user_secrets__insert_with_user() returns trigger as $$
 begin
   insert into app_private.user_secrets(user_id) values(NEW.id);
   return NEW;

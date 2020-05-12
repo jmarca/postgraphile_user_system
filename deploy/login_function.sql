@@ -2,7 +2,7 @@
 
 BEGIN;
 
-create function app_private.login(username citext, password text) returns app_private.sessions as $$
+create or replace function app_private.login(username citext, password text) returns app_private.sessions as $$
 declare
   v_user app_public.users;
   v_user_secret app_private.user_secrets;

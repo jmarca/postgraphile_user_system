@@ -53,7 +53,7 @@ create trigger _500_audit_removed
     'email'
   );
 
-create function app_public.tg_user_emails__forbid_if_verified() returns trigger as $$
+create or replace function app_public.tg_user_emails__forbid_if_verified() returns trigger as $$
 begin
   if exists(select 1 from app_public.user_emails where email = NEW.email and is_verified is true) then
     raise exception 'An account using that email address has already been created.' using errcode='EMTKN';

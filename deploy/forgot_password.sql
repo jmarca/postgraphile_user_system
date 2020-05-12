@@ -10,7 +10,7 @@
 BEGIN;
 
 SET SEARCH_PATH TO app_public,public;
-create function app_public.forgot_password(email citext) returns void as $$
+create or replace function app_public.forgot_password(email citext) returns void as $$
 declare
   v_user_email app_public.user_emails;
   v_token text;

@@ -4,7 +4,7 @@
 
 BEGIN;
 
-create function app_public.current_user_id() returns uuid as $$
+create or replace function app_public.current_user_id() returns uuid as $$
   select user_id from app_private.sessions where uuid = app_public.current_session_id();
 $$ language sql stable security definer set search_path to pg_catalog, public, pg_temp;
 comment on function app_public.current_user_id() is

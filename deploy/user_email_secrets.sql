@@ -19,7 +19,7 @@ comment on table app_private.user_email_secrets is
   E'The contents of this table should never be visible to the user. Contains data mostly related to email verification and avoiding spamming users.';
 comment on column app_private.user_email_secrets.password_reset_email_sent_at is
   E'We store the time the last password reset was sent to this email to prevent the email getting flooded.';
-create function app_private.tg_user_email_secrets__insert_with_user_email() returns trigger as $$
+create or replace function app_private.tg_user_email_secrets__insert_with_user_email() returns trigger as $$
 declare
   v_verification_token text;
 begin

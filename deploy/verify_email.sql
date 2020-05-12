@@ -4,7 +4,7 @@
 
 BEGIN;
 
-create function app_public.verify_email(user_email_id uuid, token text) returns boolean as $$
+create or replace function app_public.verify_email(user_email_id uuid, token text) returns boolean as $$
 begin
   update app_public.user_emails
   set
