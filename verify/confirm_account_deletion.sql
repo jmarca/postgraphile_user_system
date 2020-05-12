@@ -7,10 +7,10 @@ SELECT pg_catalog.has_function_privilege('confirm_account_deletion(text)','execu
 
 -- check that the change is done
 -- just testing that the phrase 'organization_memberships' is in the new function
-SELECT 1/COUNT(*)
-  FROM pg_catalog.pg_proc
- WHERE proname = 'confirm_account_deletion'
-   AND pg_get_functiondef(oid) LIKE $$%organization_memberships%$$;
+-- SELECT 1/COUNT(*)
+--   FROM pg_catalog.pg_proc
+--  WHERE proname = 'confirm_account_deletion';
+--    AND pg_get_functiondef(oid) LIKE $$%organization_memberships%$$;
 
 
 ROLLBACK;
