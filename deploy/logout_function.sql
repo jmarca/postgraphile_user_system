@@ -2,10 +2,12 @@
 
 BEGIN;
 
-create function app_public.logout() returns void as $$
+create or replace function app_public.logout() returns void as $$
 begin
   -- Delete the session
-  delete from app_private.sessions where uuid = app_public.current_session_id();
+  delete from app_private.sessions
+  where uuid = app_public.current_session_id()
+     OR user_id = app_public.current_user_id();
   -- Clear the identifier from the transaction
   perform set_config('jwt.claims.session_id', '', true);
 end;
