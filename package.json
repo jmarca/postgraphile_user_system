@@ -10,8 +10,20 @@
     "test": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} pg_prove test/*.sql",
     "sqitch:deploy": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} sqitch deploy",
     "sqitch:revert": "PGUSER=${PGUSER:=postgres} PGHOST=${PGHOST:=127.0.0.1} PGPORT=${PGPORT:=5432} PGDATABASE=${PGDATABASE:=sqitch} sqitch revert -y",
-    "install": "npm run sqitch:deploy"
+      "install": "npm run sqitch:deploy",
+      "preuninstall": "npm run sqitch:revert"
   },
+    "dependencies": {
+        "postgraphile_utility_functions": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_utility_functions",
+        "postgraphile_graphile_worker": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_graphile_worker"
+    },
+    "_exhaustive_dependencies": {
+        "postgraphile_roles": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_roles"
+        "postgraphile_schemas": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_schemas",
+        "postgraphile_utility_functions": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_utility_functions",
+        "postgraphile_extensions": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_extensions",
+        "postgraphile_graphile_worker": "git+ssh://gitolite:a/jmarca/postgraphile_related/postgraphile_graphile_worker"
+    },
   "repository": {
     "type": "git",
     "url": "gitolite:a/jmarca/postgraphile_related/postgraphile_user_system"
